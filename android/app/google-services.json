@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "800150009021",
+    "project_id": "voltproject-e803e",
+    "storage_bucket": "voltproject-e803e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800150009021:android:82981037f233fb923433d4",
+        "android_client_info": {
+          "package_name": "com.example.user_auth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTnjh81kZXlPNcD9E8rLmpBefRuKNlpCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
