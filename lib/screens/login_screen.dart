@@ -2,6 +2,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:user_auth/components/facebook_button.dart';
+import 'package:user_auth/components/google_button.dart';
 import 'package:user_auth/screens/home.dart';
 import 'package:user_auth/screens/register_screen.dart';
 
@@ -37,7 +39,7 @@ class _LoginState extends State<Login> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Register",
+                  "Login",
                   style: TextStyle(
                     fontSize: 30,
                     color: Colors.deepPurple
@@ -75,6 +77,17 @@ class _LoginState extends State<Login> {
                     }
                 }, child: const Text("Login")),
                 const SizedBox(height: 20,),
+                  const Column(
+                    children: [
+                      Text("Or"),
+                      GoogleButton(name:"login"),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FacebookButton(name: "login")
+                    ],
+                  ),
+                  const SizedBox(height: 20,),
                 Row(
                   children: [
                     const Text("Doesn't have an account?"),
@@ -101,8 +114,8 @@ class _LoginState extends State<Login> {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
       if(mounted) {
-      Navigator.push(context, 
-          MaterialPageRoute<void>(builder: (BuildContext context) => const Home(),),);
+        Navigator.push(context, 
+        MaterialPageRoute<void>(builder: (BuildContext context) => const Home(),),);
       
       Fluttertoast.showToast(
             msg: "Login Successfully",
