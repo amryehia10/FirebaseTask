@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:user_auth/firestore_service.dart';
+import 'package:user_auth/screens/login_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -23,9 +25,18 @@ class Home extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                const Text(
-                  "Hello these are your notes",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                Row(
+                  children: [
+                    const Text(
+                      "Hello these are your notes",
+                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                    IconButton(onPressed: ()async{
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.push(context, MaterialPageRoute<void>(builder: (((BuildContext context) => const Login()))));
+                    }, icon: Icon(Icons.logout))
+                  ],
                 ),
                 const SizedBox(
                   height: 12,
