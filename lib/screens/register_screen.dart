@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -152,8 +153,11 @@ class _RegisterState extends State<Register> {
             ));
 
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
+      
+      await createUserDoc(userCredential);
+      Navigator.pop(context);
       if (FirebaseAuth.instance.currentUser != Null && mounted) {
         Navigator.push(
           context,
@@ -174,6 +178,17 @@ class _RegisterState extends State<Register> {
             textColor: Colors.white,
             fontSize: 16.0);
       }
+    }
+  }
+  
+  Future<void>createUserDoc(UserCredential? userCredential) async{
+    if (userCredential != null && userCredential.user != null) {
+
+      //call firestore
+      await FirebaseFirestore.instance.collection('Users').doc(userCredential.user!.email).set({
+        'email': userCredential.user!.email,
+        'userName': nameController.text
+      }); //create collection and documentation
     }
   }
 }
